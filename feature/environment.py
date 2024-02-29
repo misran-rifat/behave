@@ -16,6 +16,8 @@ def before_all(context):
         options = ChromeOptions()
         options.add_argument("--headless")
         options.add_argument("window-size=2560x1440")
+        options.add_argument("--disable-blink-features")
+        options.add_argument("--disable-blink-features=AutomationControlled")
         options.add_argument("--log-level=3")
         context.browser = webdriver.Chrome(options=options)
 
