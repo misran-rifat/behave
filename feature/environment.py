@@ -1,14 +1,41 @@
+import yaml
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.options import Options as ChromeOptions
+from selenium.webdriver.edge.options import Options as EdgeOptions
 
 
 def before_all(context):
-    chrome_options = Options()
-    chrome_options.add_argument("--headless")
-    chrome_options.add_argument("window-size=2560x1440")
-    chrome_options.add_argument("--log-level=3")
-    context.browser = webdriver.Chrome(options=chrome_options)
+    with open('../config.yml', 'r') as file:
+        config = yaml.safe_load(file)
+    browser_type = config.get('browser', 'chrome').lower()
+
+    if browser_type == 'chrome':
+        options = ChromeOptions()
+        options.add_argument("--headless")
+        options.add_argument("window-size=2560x1440")
+        options.add_argument("--log-level=3")
+        context.browser = webdriver.Chrome(options=options)
+
+    elif browser_type == 'firefox':
+        context.browser = webdriver.Firefox()
+        context.browser.maximize_window()
+
+    elif browser_type == 'edge':
+        options = EdgeOptions()
+        options.add_argument("--headless")
+        context.browser = webdriver.Edge(options=options)
+
+    elif browser_type == 'safari':
+        context.browser = webdriver.Safari()
+
+    elif browser_type == 'ie':
+        context.browser = webdriver.Ie()
+
+    else:
+        raise ValueError(f"Unsupported browser: {browser_type}")
+
     context.browser.implicitly_wait(10)
+    context.browser.set_page_load_timeout(10)
 
 
 def after_all(context):
