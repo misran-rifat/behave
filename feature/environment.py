@@ -2,10 +2,13 @@ import yaml
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.edge.options import Options as EdgeOptions
+import os
 
 
 def before_all(context):
-    with open('../config.yml', 'r') as file:
+    script_dir = os.path.dirname(os.path.realpath(__file__))
+    config_path = os.path.join(script_dir, '..', 'config.yml')
+    with open(config_path, 'r') as file:
         config = yaml.safe_load(file)
     browser_type = config.get('browser', 'chrome').lower()
 
