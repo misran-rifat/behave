@@ -2,3 +2,5 @@ behave~=1.2.6
 selenium~=4.18.1
 yaml~=0.2.5
 pyyaml~=6.0.1
+pandas~=2.1.4
+faker~=23.3.0
