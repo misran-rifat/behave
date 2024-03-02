@@ -4,7 +4,7 @@ import pandas as pd
 
 def authenticate_to_aws():
     try:
-        credentials_path = '/path/to/aws_credentials.csv'
+        credentials_path = '../data/aws_credential/aws_credentials.csv'
         credentials_df = pd.read_csv(credentials_path)
         aws_access_key_id = credentials_df['AWS_ACCESS_KEY_ID'].iloc[0]
         aws_secret_access_key = credentials_df['AWS_SECRET_ACCESS_KEY'].iloc[0]
