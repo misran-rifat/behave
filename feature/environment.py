@@ -1,8 +1,10 @@
+import datetime
+import os
+
 import yaml
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.edge.options import Options as EdgeOptions
-import os
 
 
 def before_all(context):
@@ -41,6 +43,13 @@ def before_all(context):
 
     context.browser.implicitly_wait(10)
     context.browser.set_page_load_timeout(10)
+
+
+def after_scenario(context, scenario):
+    if scenario.status == "failed":
+        timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+        screenshot_path = os.path.join("feature", "data", "screenshots", f"failed_{scenario.name.replace(' ', '_')}_{timestamp}.png")
+        context.browser.save_screenshot(screenshot_path)
 
 
 def after_all(context):
