@@ -7,3 +7,5 @@ yaml~=0.2.5
 pyyaml~=6.0.1
 allure-behave~=2.13.2
 allure-python-commons~=2.13.2
+python==3.11.7
+pip==23.3.1
