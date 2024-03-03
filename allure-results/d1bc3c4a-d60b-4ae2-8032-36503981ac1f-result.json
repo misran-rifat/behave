@@ -1,0 +1,53 @@
+{
+  "name": "User is able to search information on google -- @1.1 ",
+  "status": "passed",
+  "steps": [
+    {
+      "name": "Given user visits https://www.google.com",
+      "status": "passed",
+      "start": 1709428636182,
+      "stop": 1709428636721
+    },
+    {
+      "name": "Then user searches python behave",
+      "status": "passed",
+      "start": 1709428636721,
+      "stop": 1709428637236
+    },
+    {
+      "name": "Then the page title should contain the python behave",
+      "status": "passed",
+      "start": 1709428637237,
+      "stop": 1709428637243
+    }
+  ],
+  "parameters": [
+    {
+      "name": "search_word",
+      "value": "python behave"
+    }
+  ],
+  "start": 1709428636182,
+  "stop": 1709428637243,
+  "uuid": "3d2ba6de-700d-4e17-98ff-bcec5e46eb32",
+  "historyId": "b09635c098c5691c52e94233de62c501",
+  "fullName": "Google search: User is able to search information on google",
+  "labels": [
+    {
+      "name": "severity",
+      "value": "normal"
+    },
+    {
+      "name": "feature",
+      "value": "Google search"
+    },
+    {
+      "name": "framework",
+      "value": "behave"
+    },
+    {
+      "name": "language",
+      "value": "cpython3"
+    }
+  ]
+}
