@@ -8,9 +8,7 @@ from selenium.webdriver.edge.options import Options as EdgeOptions
 
 
 def before_all(context):
-    script_dir = os.path.dirname(os.path.realpath(__file__))
-    config_path = os.path.join(script_dir, '..', 'config.yml')
-    with open(config_path, 'r') as file:
+    with open('config.yml', 'r') as file:
         config = yaml.safe_load(file)
     browser_type = config.get('browser', 'chrome').lower()
 
