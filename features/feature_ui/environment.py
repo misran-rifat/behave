@@ -1,6 +1,6 @@
 import datetime
 import os
-
+import logging
 import yaml
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options as ChromeOptions
@@ -8,6 +8,15 @@ from selenium.webdriver.edge.options import Options as EdgeOptions
 
 
 def before_all(context):
+    logger = logging.getLogger('logger')
+    logger.setLevel(logging.INFO)
+    ch = logging.StreamHandler()
+    ch.setLevel(logging.INFO)
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    ch.setFormatter(formatter)
+    logger.addHandler(ch)
+    context.logger = logger
+
     with open('config.yml', 'r') as file:
         config = yaml.safe_load(file)
     browser_type = config.get('browser', 'chrome').lower()
