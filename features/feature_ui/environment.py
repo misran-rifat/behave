@@ -16,6 +16,7 @@ def before_all(context):
     ch.setFormatter(formatter)
     logger.addHandler(ch)
     context.logger = logger
+    context.logger.info('Automated testing started')
 
     with open('config.yml', 'r') as file:
         config = yaml.safe_load(file)
@@ -48,8 +49,13 @@ def before_all(context):
     else:
         raise ValueError(f"Unsupported browser: {browser_type}")
 
+    context.logger.info(f"Starting browser : {browser_type}")
     context.browser.implicitly_wait(10)
     context.browser.set_page_load_timeout(10)
+
+
+def before_scenario(context, scenario):
+    context.logger.info(f'Scenario: {scenario.name}')
 
 
 def after_scenario(context, scenario):
@@ -61,3 +67,5 @@ def after_scenario(context, scenario):
 
 def after_all(context):
     context.browser.quit()
+    context.logger.info(f'Browser closed')
+    context.logger.info(f'Testing is completed.')
