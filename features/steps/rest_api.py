@@ -17,8 +17,7 @@ def step_impl(context, endpoint):
 
 @then("the status code should be (?P<code>.+)")
 def step_impl(context, code):
-    assert context.response.status_code == int(
-        code), f"Expected status code {code} but received {context.response.status_code}"
+    assert context.response.status_code == int(code), f"Expected status code {code} but received {context.response.status_code}"
 
 
 @given("I use POST_request to call the (?P<endpoint>.+) with '(?P<payload>.+)'")
