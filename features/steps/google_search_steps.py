@@ -1,6 +1,5 @@
 from behave import *
-
-from features.feature_ui.pages.google_home_page import SearchPage
+from pages.google_home_page import SearchPage
 
 
 @given("user visits {url}")
