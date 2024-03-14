@@ -61,7 +61,7 @@ def before_scenario(context, scenario):
 def after_scenario(context, scenario):
     if scenario.status == "failed":
         timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-        screenshot_path = os.path.join("features", "data", "screenshots", f"failed_{scenario.name.replace(' ', '_')}_{timestamp}.png")
+        screenshot_path = os.path.join("util", "data", "screenshots", f"failed_{scenario.name.replace(' ', '_')}_{timestamp}.png")
         context.browser.save_screenshot(screenshot_path)
 
 
