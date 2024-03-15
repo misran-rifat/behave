@@ -36,7 +36,6 @@ def after_scenario(context, scenario):
 
 def before_tag(context, tag):
     if tag == "ui":
-        context.logger.info(f"Tag : {tag}")
         with open('config.yml', 'r') as file:
             config = yaml.safe_load(file)
         browser_type = config.get('browser', 'chrome').lower()
@@ -73,13 +72,14 @@ def before_tag(context, tag):
         else:
             raise ValueError(f"Unsupported browser: {browser_type}")
 
-        context.logger.info(f"Starting browser : {browser_type}")
-        context.browser.implicitly_wait(10)
-        context.browser.set_page_load_timeout(10)
+        timeout = 30
+        context.browser.implicitly_wait(timeout)
+        context.browser.set_page_load_timeout(timeout)
+
+        context.logger.info(f"Starting {browser_type} browser")
 
 
 def after_tag(context, tag):
     if tag == "ui":
-        context.logger.info(f"Tag : {tag}")
         context.browser.quit()
         context.logger.info(f'Browser closed')
