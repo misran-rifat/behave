@@ -1,4 +1,4 @@
-@api
+@api @regression
 Feature: Rest api testing
 
   Scenario Outline: Get request

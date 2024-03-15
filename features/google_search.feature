@@ -1,4 +1,4 @@
-@ui
+@ui @regression
 Feature: Google search
 
   Background: User is on Google homepage
