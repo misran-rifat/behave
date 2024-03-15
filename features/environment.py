@@ -18,40 +18,9 @@ def before_all(context):
     context.logger = logger
     context.logger.info('Automated testing started')
 
-    with open('config.yml', 'r') as file:
-        config = yaml.safe_load(file)
-    browser_type = config.get('browser', 'chrome').lower()
 
-    if browser_type == 'chrome':
-        options = ChromeOptions()
-        options.add_argument("--headless")
-        options.add_argument("window-size=1920x1080")
-        options.add_argument("--disable-blink-features")
-        options.add_argument("--disable-blink-features=AutomationControlled")
-        options.add_argument("--log-level=3")
-        context.browser = webdriver.Chrome(options=options)
-
-    elif browser_type == 'firefox':
-        context.browser = webdriver.Firefox()
-        context.browser.maximize_window()
-
-    elif browser_type == 'edge':
-        options = EdgeOptions()
-        options.add_argument("--headless")
-        context.browser = webdriver.Edge(options=options)
-
-    elif browser_type == 'safari':
-        context.browser = webdriver.Safari()
-
-    elif browser_type == 'ie':
-        context.browser = webdriver.Ie()
-
-    else:
-        raise ValueError(f"Unsupported browser: {browser_type}")
-
-    context.logger.info(f"Starting browser : {browser_type}")
-    context.browser.implicitly_wait(10)
-    context.browser.set_page_load_timeout(10)
+def after_all(context):
+    context.logger.info(f'Testing is completed.')
 
 
 def before_scenario(context, scenario):
@@ -65,7 +34,52 @@ def after_scenario(context, scenario):
         context.browser.save_screenshot(screenshot_path)
 
 
-def after_all(context):
-    context.browser.quit()
-    context.logger.info(f'Browser closed')
-    context.logger.info(f'Testing is completed.')
+def before_tag(context, tag):
+    if tag == "ui":
+        context.logger.info(f"Tag : {tag}")
+        with open('config.yml', 'r') as file:
+            config = yaml.safe_load(file)
+        browser_type = config.get('browser', 'chrome').lower()
+
+        if browser_type == 'chrome':
+            options = ChromeOptions()
+            options.add_argument("--disable-blink-features")
+            options.add_argument("--disable-blink-features=AutomationControlled")
+            options.add_argument("--log-level=3")
+            options.add_argument("--headless")
+            options.add_argument("--no-sandbox")
+            options.add_argument("--disable-dev-shm-usage")
+            options.add_argument('window-size=2560x1440')
+            options.add_argument("--verbose")
+            options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36")
+            options.add_argument('--disable-gpu')
+            context.browser = webdriver.Chrome(options=options)
+
+        elif browser_type == 'firefox':
+            context.browser = webdriver.Firefox()
+            context.browser.maximize_window()
+
+        elif browser_type == 'edge':
+            options = EdgeOptions()
+            options.add_argument("--headless")
+            context.browser = webdriver.Edge(options=options)
+
+        elif browser_type == 'safari':
+            context.browser = webdriver.Safari()
+
+        elif browser_type == 'ie':
+            context.browser = webdriver.Ie()
+
+        else:
+            raise ValueError(f"Unsupported browser: {browser_type}")
+
+        context.logger.info(f"Starting browser : {browser_type}")
+        context.browser.implicitly_wait(10)
+        context.browser.set_page_load_timeout(10)
+
+
+def after_tag(context, tag):
+    if tag == "ui":
+        context.logger.info(f"Tag : {tag}")
+        context.browser.quit()
+        context.logger.info(f'Browser closed')

@@ -1,3 +1,4 @@
+@ui
 Feature: Google search
 
   Background: User is on Google homepage
