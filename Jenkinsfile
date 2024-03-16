@@ -16,13 +16,17 @@ pipeline {
         
         stage('Install Dependencies') {
             steps {
-                sh '/Library/Frameworks/Python.framework/Versions/3.12/bin/pip install -r requirements.txt'
+                script {
+                    sh 'source myenv/bin/activate && pip install -r requirements.txt'
+                }
             }
         }
         
         stage('Run Tests') {
             steps {
-                sh 'behave'
+                script {
+                    sh 'source myenv/bin/activate && behave'
+                }
             }
         }
     }
