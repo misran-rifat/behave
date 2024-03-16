@@ -4,9 +4,13 @@ pipeline {
     stages {
         stage('Setup') {
             steps {
-                sh 'PYTHON="/Library/Frameworks/Python.framework/Versions/3.12/bin/python3"'
-                sh '$PYTHON -m venv myenv'
-                sh 'source myenv/bin/activate'
+                script {
+                    sh '''
+                    PYTHON="/Library/Frameworks/Python.framework/Versions/3.12/bin/python3"
+                    $PYTHON -m venv myenv
+                    source myenv/bin/activate
+                    '''
+                }
             }
         }
         
