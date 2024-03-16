@@ -43,8 +43,7 @@ pipeline {
 
     post {
         always {
-            // Deactivate the virtual environment
-            sh "deactivate"
+            // Remove the unnecessary deactivation command
         }
     }
 }
