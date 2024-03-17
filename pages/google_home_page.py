@@ -14,7 +14,7 @@ class SearchPage:
 
     def search_for(self, search_word):
         search_bar = wait_for_element_visibility_using_xpath(self.browser, SearchPage.search_bar_xpath)
-        assert not search_bar.is_displayed(), f"{search_bar} is not visible."
+        assert search_bar.is_displayed(), f"{search_bar} is not visible."
         search_bar.send_keys(search_word + Keys.ENTER)
 
     def title_should_contain(self, search_word):
