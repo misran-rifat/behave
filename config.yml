@@ -1,1 +1,5 @@
 browser: chrome
+implicit_wait: 30
+page_load_timeout: 30
+headless: false
+window_size: 2560x1440
