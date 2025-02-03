@@ -6,4 +6,14 @@
 /.idea/modules.xml
 /.idea/vcs.xml
 .idea/
+.vscode/
+.venv/
+.pytest_cache/
+.pycache/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pyw
+*.pyz
 
