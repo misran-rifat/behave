@@ -1,7 +1,7 @@
 import json
 
-from behave import *
 import requests
+from behave import *
 
 use_step_matcher("re")
 

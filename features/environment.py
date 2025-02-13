@@ -1,21 +1,19 @@
 import datetime
-import os
 import logging
+import time
+from functools import wraps
+from pathlib import Path
+from typing import Any, Dict, Optional
+
 import yaml
 from selenium import webdriver
+from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium.webdriver.edge.options import Options as EdgeOptions
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
-from selenium.webdriver.safari.options import Options as SafariOptions
 from selenium.webdriver.firefox.service import Service
 from selenium.webdriver.remote.webdriver import WebDriver
-from selenium.common.exceptions import WebDriverException
-import time
-import random
-from functools import wraps
-from typing import Optional, Dict, Any
-import json
-from pathlib import Path
+from selenium.webdriver.safari.options import Options as SafariOptions
 
 
 def retry_on_exception(retries: int = 3, delay: int = 1):

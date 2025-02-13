@@ -1,5 +1,5 @@
-from selenium.webdriver import Keys
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver import Keys
 
 from util.ui import *
 
